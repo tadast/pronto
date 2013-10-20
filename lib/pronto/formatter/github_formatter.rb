@@ -20,6 +20,16 @@ module Pronto
       private
 
       def create_comment(repo, sha, position, path, body)
+        "RANDOM USELESS STRING"
+
+        comments = client.commit_comments(repo, sha)
+
+        existing_comment = comments.find do |comment|
+          comment.position == position &&
+            comment.path == path &&
+            comment.body == body
+        end
+
         comments = client.commit_comments(repo, sha)
 
         existing_comment = comments.find do |comment|
@@ -29,6 +39,7 @@ module Pronto
         end
 
         unless existing_comment
+          unused_variable = position
           client.create_commit_comment(repo, sha, body, path, nil, position)
         end
       end

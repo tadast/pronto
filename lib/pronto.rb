@@ -49,8 +49,9 @@ module Pronto
   private
 
   def self.run_all_runners(patches, commit)
-    Runner.runners.map do |runner|
-      runner.new.run(patches, commit)
+    Runner.runners.map do |runner_class|
+      runner = runner_class.new(patches, commit)
+      runner.run
     end.flatten.compact
   end
 

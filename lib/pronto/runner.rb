@@ -1,5 +1,5 @@
 module Pronto
-  class Runner
+  class Runner < Struct.new(:patches, :commit)
     include Plugin
 
     def self.runners

@@ -17,7 +17,9 @@ module Pronto
     end
 
     def patches_with_additions
-      patches.select { |patch| patch.additions > 0 }
+      @patches_with_additions ||= begin
+        patches.select { |patch| patch.additions > 0 }
+      end
     end
 
     def self.runners
